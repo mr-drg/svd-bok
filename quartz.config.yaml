@@ -6,7 +6,7 @@ configuration:
   enablePopovers: true
   analytics: null
   locale: ru-RU
-  baseUrl: mr-drg.github.io/quatz-site
+  baseUrl: mr-drg.github.io/svd-bok
   ignorePatterns:
     - private
     - templates
