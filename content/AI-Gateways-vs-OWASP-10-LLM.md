@@ -6,7 +6,7 @@ tags:
 date: 2026-08-02
 ---
 
-Сравнение четырёх российских AI Gateway / LLM-security продуктов — HiveTrace, INFERA Security / AI.Firewall, AppSec.AIGate, Platform V SOWA — с категориями риска [OWASP Top 10 для LLM-приложений 2025](https://mr-drg.github.io/quatz-site/owasp-top-10-llm-2025).
+Сравнение четырёх российских AI Gateway / LLM-security продуктов — HiveTrace, INFERA Security / AI.Firewall, AppSec.AIGate, Platform V SOWA — с категориями риска [OWASP Top 10 для LLM-приложений 2025](./owasp-top-10-llm-2025).
 
 **Методология.** Оценка построена только на **публичной документации и маркетинговых материалах** вендоров (ссылки — в разделе «Источники»), без hands-on тестирования продуктов. Статус «Не подтверждено» означает «не найдено в открытых источниках», а не «функция отсутствует» — у вендора она может быть реализована, но не задокументирована публично.
 
