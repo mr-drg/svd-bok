@@ -1,10 +1,13 @@
 ---
 title: "AI Gateway vs OWASP Top 10 для LLM: сравнение российских решений"
+description: "Сравнение российских AI Gateway / LLM-security продуктов по категориям риска OWASP Top 10 для LLM-приложений 2025 — на основе публичной документации."
 tags:
   - кибербез
   - ИИ
 date: 2026-08-02
 ---
+
+![Обложка](./ai-gateways-vs-owasp-10-llm-og-image.webp)
 
 Сравнение четырёх российских AI Gateway / LLM-security продуктов — HiveTrace, INFERA Security / AI.Firewall, AppSec.AIGate, Platform V SOWA — с категориями риска [OWASP Top 10 для LLM-приложений 2025](./owasp-top-10-llm-2025).
 

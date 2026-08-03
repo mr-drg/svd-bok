@@ -124,6 +124,9 @@ def build_quartz_frontmatter(fm: dict, fallback_title: str) -> str:
         tags = [tags]
     created = fm.get("created", datetime.date.today().isoformat())
     lines = ["---", f'title: "{title}"']
+    description = fm.get("description")
+    if description:
+        lines.append(f'description: "{description}"')
     if tags:
         lines.append("tags:")
         lines.extend(f"  - {t}" for t in tags)
@@ -167,7 +170,9 @@ def sync(dry_run: bool = False) -> int:
 
         clean_body = unwrap_wikilinks(strip_links_sections(body))
         new_frontmatter = build_quartz_frontmatter(fm, fallback_title=path.stem)
-        out_text = f"{new_frontmatter}\n{clean_body}"
+        slug = path.stem.lower()
+        cover = f"![Обложка](./{slug}-og-image.webp)\n\n"
+        out_text = f"{new_frontmatter}\n\n{cover}{clean_body.lstrip(chr(10))}"
 
         out_path = CONTENT_DIR / path.name
         print(f"COPY: {path.name} -> {out_path.relative_to(CONTENT_DIR.parent)}")
