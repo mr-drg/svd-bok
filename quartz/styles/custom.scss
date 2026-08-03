@@ -7,3 +7,20 @@
 html {
   font-size: 19px;
 }
+
+// Wide comparison tables (many columns) don't fit the article column at the
+// larger base font size — shrink just the table text/padding so it wraps
+// within the container instead of forcing horizontal scroll.
+.table-container table {
+  font-size: 0.68rem;
+
+  th,
+  td {
+    min-width: 0;
+    padding: 0.3rem 0.4rem;
+  }
+
+  & > * {
+    line-height: 1.3rem;
+  }
+}
