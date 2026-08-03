@@ -1,17 +1,22 @@
-# Quartz v5
+# quatz-site
 
-> “[One] who works with the door open gets all kinds of interruptions, but [they] also occasionally gets clues as to what the world is and what might be important.” — Richard Hamming
+Личный сайт-digital garden на [Quartz](https://quartz.jzhao.xyz), питается
+куратированным подмножеством заметок из личной базы знаний (Vault_skynet,
+`20_Cards/20.7_Publish/`).
 
-Quartz is a set of tools that helps you publish your [digital garden](https://jzhao.xyz/posts/networked-thought) and notes as a website for free.
+Контент попадает сюда только через `scripts/sync_from_vault.py` и только
+после ежедневной модерации в чате (см. скилл `quatz-publish` в Vault) —
+не редактируй `content/` напрямую, изменения потеряются при следующей
+синхронизации.
 
-🔗 Read the documentation and get started: https://quartz.jzhao.xyz/
+Первичная настройка (аккаунт GitHub, репозиторий, Pages, git-аутентификация)
+описана в [SETUP.md](./SETUP.md).
 
-[Join the Discord Community](https://discord.gg/cRFFHYye7t)
+## Локальная сборка/просмотр
 
-## Sponsors
+```bash
+npm install
+npx quartz build --serve
+```
 
-<p align="center">
-  <a href="https://github.com/sponsors/jackyzha0">
-    <img src="https://cdn.jsdelivr.net/gh/jackyzha0/jackyzha0/sponsorkit/sponsors.svg" />
-  </a>
-</p>
+Построено на [Quartz](https://github.com/jackyzha0/quartz) (MIT).
