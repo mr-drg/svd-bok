@@ -15,7 +15,7 @@ configuration:
     fontOrigin: googleFonts
     cdnCaching: true
     typography:
-      header: Schibsted Grotesk
+      header: Montserrat
       body: Source Sans Pro
       code: JetBrains Mono
     colors:
@@ -30,11 +30,15 @@ configuration:
         highlight: rgba(0, 134, 163, 0.10)
         textHighlight: "#1fe2ff55"
       darkMode:
-        light: "#0b0a14"
-        lightgray: "#1c1a2b"
-        gray: "#5b5872"
-        darkgray: "#d8d6e6"
-        dark: "#f2f0fa"
+        # Dark palette aligned with the TS Solution style guide's structure
+        # (skills/SKILL_RULES.md #2: bg/surface/border/text) — same layering
+        # logic, but the accent stays our own cyan/purple, not TS blue
+        # (#0892D0), so the site doesn't read as TS-branded.
+        light: "#0f0f13"
+        lightgray: "#2a2a38"
+        gray: "#8a8aa8"
+        darkgray: "#e8e4f0"
+        dark: "#f5f3fb"
         secondary: "#1fe2ff"
         tertiary: "#9b30ff"
         highlight: rgba(31, 226, 255, 0.12)
