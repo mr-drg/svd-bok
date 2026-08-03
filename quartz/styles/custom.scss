@@ -24,3 +24,34 @@ html {
     line-height: 1.3rem;
   }
 }
+
+// Sidebar headings (site title, "Недавние заметки", "Вид графа",
+// "Оглавление" etc.) inherit the same h1/h2/h3 sizes as article content —
+// at the larger base font size they read as too heavy/dominant in the
+// narrow sidebar columns. Scale them down and treat component titles
+// (h3) as quiet section labels instead of full headings.
+.sidebar {
+  h2.page-title {
+    font-size: 1.15rem;
+  }
+
+  // Only the component section labels themselves (direct child of the
+  // component wrapper) — NOT the per-item note titles nested inside
+  // recent-notes' .desc, which are also <h3> but must stay normal size.
+  > .recent-notes > h3,
+  .graph > h3,
+  .toc-header h3 {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--gray);
+    margin-top: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  // Per-item note titles in the recent-notes list — smaller than default
+  // article h3, but still normal case (these are just links, not labels).
+  .recent-notes .desc h3 {
+    font-size: 0.95rem;
+  }
+}
