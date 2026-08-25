@@ -50,13 +50,68 @@ html {
     font-size: 1.15rem;
   }
 
-  .graph > h3,
-  .toc-header h3 {
+  .graph > h3 {
     font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     color: var(--gray);
     margin-top: 1.2rem;
     margin-bottom: 0.5rem;
+  }
+
+  // The table-of-contents package's ru-RU locale string is "Оглавление"
+  // and there's no component option to override it — relabel visually to
+  // "Содержание". font-size:0 collapses the real text node to nothing;
+  // ::after stays a normal *inline* pseudo-element (no position/overflow
+  // tricks) so the button's box is sized by the ::after content only.
+  // No margin-top/bottom here (unlike the .graph label above): this h3
+  // lives inside button.toc-header, a small flex row vertically centered
+  // by the package's own CSS — extra margins made the button taller than
+  // its collapsed flex-basis (1.4rem), so the whole header got clipped
+  // together with the list when folded.
+  .toc-header h3 {
+    font-size: 0;
+
+    &::after {
+      content: "Содержание";
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--gray);
+    }
+  }
+}
+
+// Bug: collapsing the TOC only shrinks the .toc flex container's basis
+// (package CSS: `.toc:has(button.toc-header.collapsed) { flex: 0 1 1.4rem }`)
+// but never actually hides ul.toc-content — the package's inline script
+// does toggle a "collapsed" class onto it (button's nextElementSibling),
+// there's just no rule reacting to it. Left as-is, the still-rendered
+// (empty-looking, clipped) list box overlaps the "Содержание" label.
+.toc-content.collapsed {
+  display: none;
+}
+
+// Smaller, denser TOC entries — easier to scan as a nav list than at
+// article body text size, especially on long pages with many headings.
+.toc-content.overflow {
+  font-size: 0.78rem;
+
+  > li {
+    line-height: 1.5rem;
+  }
+}
+
+// Hover-reveal "#" permalink icon next to headings in the article body —
+// not wanted, remove entirely rather than just leave it invisible until
+// hover.
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  &[id] > a[href^="#"] {
+    display: none;
   }
 }
