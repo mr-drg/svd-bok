@@ -25,6 +25,18 @@ html {
   }
 }
 
+// Sidebars are sticky and pinned to 100vh (base.scss), but have no
+// overflow-y — on shorter viewports or once there's enough content
+// (more articles in "Недавние заметки", a long "Оглавление"), content
+// simply gets clipped by the sidebar's own box instead of scrolling:
+// the Explorer at the bottom of the left sidebar becomes unreachable,
+// and a long TOC on the right visually spills past its frame.
+@media all and ($desktop) {
+  .sidebar {
+    overflow-y: auto;
+  }
+}
+
 // Sidebar headings (site title, "Недавние заметки", "Вид графа",
 // "Оглавление" etc.) inherit the same h1/h2/h3 sizes as article content —
 // at the larger base font size they read as too heavy/dominant in the
