@@ -176,8 +176,11 @@ plugins:
     layout:
       position: beforeBody
       priority: 20
+  # Disabled: duplicates the tags already shown in note-properties'
+  # "Properties" table (row "tags", same clickable ./tags/X links) — with
+  # both enabled, every article showed tags twice under the title.
   - source: "@quartz-community/tag-list"
-    enabled: true
+    enabled: false
     layout:
       position: beforeBody
       priority: 30
