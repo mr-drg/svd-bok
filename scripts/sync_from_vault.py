@@ -97,15 +97,17 @@ def has_internal_links(body: str) -> str | None:
 
 
 LINKS_SECTION_RE = re.compile(
-    r"^##\s*(Возможные связи|Связи)\s*\n.*?(?=\n##\s|\Z)",
+    r"^##\s*(Возможные связи|Связи|История обновлений)\s*\n.*?(?=\n##\s|\Z)",
     re.DOTALL | re.MULTILINE,
 )
 
 
 def strip_links_sections(body: str) -> str:
-    """Drop internal-linking sections entirely — public pages don't carry
-    vault backlinks (feedback_html_no_internal_links): connections belong in
-    the vault note, not in what gets published."""
+    """Drop service sections entirely — public pages carry neither vault
+    backlinks (feedback_html_no_internal_links) nor the editorial changelog
+    («История обновлений» — служебный раздел для сопровождения статьи в
+    Vault, не для читателя сайта): both belong in the vault note, not in
+    what gets published."""
     return LINKS_SECTION_RE.sub("", body)
 
 
