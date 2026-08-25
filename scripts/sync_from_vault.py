@@ -3,10 +3,13 @@
 Sync approved candidates from Vault_skynet/20_Cards/20.7_Publish into this
 Quartz site's content/ folder.
 
-Only files whose frontmatter has publish_status: approved or published are
-copied. Everything else (candidate, missing status) is skipped. This is the
-last automated gate before content becomes public — it does not replace
-human judgement, it backs it up:
+Folder location is the primary status signal: only files physically inside
+20.7_Publish/approved/ or 20.7_Publish/published/ are scanned at all —
+20.7_Publish/candidate/ is never touched. The frontmatter publish_status
+field is checked too and must agree with the folder; a mismatch is treated
+as a stop signal rather than guessed at. This is the last automated gate
+before content becomes public — it does not replace human judgement, it
+backs it up:
 
 - files tagged #конфиденциально or with category: Личное are never copied,
   even if publish_status says approved (defensive double-check of dlp-guard);
@@ -33,6 +36,9 @@ VAULT_PUBLISH_DIR = Path(
     "/Users/dr/Yandex.Disk.localized/Vault_skynet/20_Cards/20.7_Publish"
 )
 CONTENT_DIR = Path(__file__).resolve().parent.parent / "content"
+
+# Only these subfolders are ever scanned — candidate/ is deliberately excluded.
+SCANNED_SUBDIRS = ("approved", "published")
 
 SKIP_FILENAMES = {"00_MoC_Publish.md"}
 
@@ -144,10 +150,17 @@ def sync(dry_run: bool = False) -> int:
 
     copied, skipped_status, skipped_confidential, skipped_internal_link = 0, 0, 0, 0
 
-    for path in sorted(VAULT_PUBLISH_DIR.glob("*.md")):
+    paths = [
+        path
+        for subdir in SCANNED_SUBDIRS
+        for path in sorted((VAULT_PUBLISH_DIR / subdir).glob("*.md"))
+    ]
+
+    for path in paths:
         if path.name in SKIP_FILENAMES:
             continue
 
+        expected_status = path.parent.name  # "approved" or "published"
         text = path.read_text(encoding="utf-8")
         fm, body = parse_frontmatter(text)
 
@@ -157,8 +170,11 @@ def sync(dry_run: bool = False) -> int:
             continue
 
         status = fm.get("publish_status", "")
-        if status not in ("approved", "published"):
-            print(f"SKIP (status={status or 'missing'}): {path.name}")
+        if status != expected_status:
+            print(
+                f"SKIP (frontmatter publish_status={status or 'missing'} "
+                f"!= folder {expected_status}/): {path.name}"
+            )
             skipped_status += 1
             continue
 
