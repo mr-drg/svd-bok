@@ -10,7 +10,7 @@ date: 2026-08-02
 ![Обложка](./owasp-top-10-llm-2025-og-image.webp)
 
 > [!info] Источник
-> Адаптация официального документа «OWASP Top 10 for LLM Applications» (версия 2025, релиз 18.11.2024, project leads: Steve Wilson, Ads Dawson). Оригинал распространяется по лицензии CC BY-SA 4.0 — при использовании обязательна атрибуция OWASP.
+> Адаптация официального документа [«OWASP Top 10 for LLM Applications»](https://owasp.org/www-project-top-10-for-large-language-model-applications/) (версия 2025, релиз 18.11.2024, project leads: Steve Wilson, Ads Dawson). Оригинал распространяется по лицензии CC BY-SA 4.0 — при использовании обязательна атрибуция OWASP.
 
 Топ-10 OWASP для LLM-приложений — сообществный стандарт, описывающий десять наиболее значимых классов уязвимостей в приложениях на базе больших языковых моделей. Версия 2025 года переработала список 2023 года: «Unbounded Consumption» расширил прежний «Denial of Service» темой неконтролируемых затрат, добавлена новая категория «Vector and Embedding Weaknesses» (безопасность RAG), добавлена «System Prompt Leakage» (реальные эксплойты показали, что системные промпты нельзя считать защищённым секретом), расширена «Excessive Agency» в связи с ростом агентных архитектур.
 
