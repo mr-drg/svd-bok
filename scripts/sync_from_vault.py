@@ -44,7 +44,11 @@ SKIP_FILENAMES = {"00_MoC_Publish.md"}
 
 INTERNAL_LINK_PATTERNS = [
     re.compile(r"bitrix24", re.IGNORECASE),
-    re.compile(r"\b(?:10\.|192\.168\.|172\.(?:1[6-9]|2\d|3[0-1])\.)\d+\.\d+"),  # private IPs
+    # Private IPs. Octets capped at \d{1,3}\b (not \d+) so a DD.MM.YYYY date
+    # like "10.06.2021" doesn't false-positive as a 10.x.x address — a real
+    # last octet is always <=3 digits and ends at a word boundary, a year
+    # doesn't.
+    re.compile(r"\b(?:10\.|192\.168\.|172\.(?:1[6-9]|2\d|3[0-1])\.)\d{1,3}\.\d{1,3}\b"),
 ]
 
 WIKILINK_RE = re.compile(r"\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|([^\]]+))?\]\]")
