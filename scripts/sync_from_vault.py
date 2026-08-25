@@ -56,14 +56,20 @@ WIKILINK_RE = re.compile(r"\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|([^\]]+))?\]\]")
 FRONTMATTER_RE = re.compile(r"^---\n(.*?)\n---\n(.*)$", re.DOTALL)
 
 
+LIST_ITEM_RE = re.compile(r"^\s*-\s*(.*)$")
+
+
 def parse_frontmatter(text: str) -> tuple[dict, str]:
     match = FRONTMATTER_RE.match(text)
     if not match:
         return {}, text
     raw, body = match.group(1), match.group(2)
     fm: dict = {}
-    for line in raw.splitlines():
-        line = line.rstrip()
+    lines = raw.splitlines()
+    i = 0
+    while i < len(lines):
+        line = lines[i].rstrip()
+        i += 1
         if not line or line.startswith("#"):
             continue
         if ":" not in line:
@@ -71,7 +77,19 @@ def parse_frontmatter(text: str) -> tuple[dict, str]:
         key, _, value = line.partition(":")
         key = key.strip()
         value = value.strip()
-        if value.startswith("[") and value.endswith("]"):
+        if not value:
+            # Possibly a multi-line YAML block list:
+            #   tags:
+            #     - a
+            #     - b
+            items = []
+            while i < len(lines) and LIST_ITEM_RE.match(lines[i]):
+                item = LIST_ITEM_RE.match(lines[i]).group(1).strip().strip('"').strip("'")
+                if item:
+                    items.append(item)
+                i += 1
+            fm[key] = items
+        elif value.startswith("[") and value.endswith("]"):
             items = [v.strip().strip('"').strip("'") for v in value[1:-1].split(",")]
             fm[key] = [v for v in items if v]
         else:
