@@ -15,34 +15,32 @@ configuration:
     fontOrigin: googleFonts
     cdnCaching: true
     typography:
-      header: Montserrat
+      # Matches github.com/brennodemarchi/portfolio-quartz (branch v4) —
+      # requested reference style.
+      header: Schibsted Grotesk
       body: Source Sans Pro
-      code: JetBrains Mono
+      code: IBM Plex Mono
     colors:
       lightMode:
-        light: "#faf9fd"
-        lightgray: "#e7e5f0"
-        gray: "#8b899e"
-        darkgray: "#3a3850"
-        dark: "#171527"
-        secondary: "#0086a3"
-        tertiary: "#7a1fcc"
-        highlight: rgba(0, 134, 163, 0.10)
-        textHighlight: "#1fe2ff55"
+        light: "#faf8f8"
+        lightgray: "#e5e5e5"
+        gray: "#b8b8b8"
+        darkgray: "#4e4e4e"
+        dark: "#2b2b2b"
+        secondary: "#284b63"
+        tertiary: "#84a59d"
+        highlight: rgba(143, 159, 169, 0.15)
+        textHighlight: "#fff23688"
       darkMode:
-        # Dark palette aligned with the TS Solution style guide's structure
-        # (skills/SKILL_RULES.md #2: bg/surface/border/text) — same layering
-        # logic, but the accent stays our own cyan/purple, not TS blue
-        # (#0892D0), so the site doesn't read as TS-branded.
-        light: "#0f0f13"
-        lightgray: "#2a2a38"
-        gray: "#8a8aa8"
-        darkgray: "#e8e4f0"
-        dark: "#f5f3fb"
-        secondary: "#1fe2ff"
-        tertiary: "#9b30ff"
-        highlight: rgba(31, 226, 255, 0.12)
-        textHighlight: "#1fe2ff55"
+        light: "#161618"
+        lightgray: "#393639"
+        gray: "#646464"
+        darkgray: "#d4d4d4"
+        dark: "#ebebec"
+        secondary: "#7b97aa"
+        tertiary: "#84a59d"
+        highlight: rgba(143, 159, 169, 0.15)
+        textHighlight: "#b3aa0288"
 plugins:
   - source: "@quartz-community/created-modified-date"
     enabled: true
@@ -104,7 +102,7 @@ plugins:
   - source: "@quartz-community/quartz-fonts"
     enabled: true
   - source: "@quartz-themes/core"
-    enabled: true
+    enabled: false
     options:
       theme: minimal
       mode: both
@@ -179,7 +177,7 @@ plugins:
       position: beforeBody
       priority: 20
   - source: "@quartz-community/tag-list"
-    enabled: false
+    enabled: true
     layout:
       position: beforeBody
       priority: 30
@@ -195,7 +193,7 @@ plugins:
       priority: 30
       group: toolbar
   - source: "@quartz-community/reader-mode"
-    enabled: true
+    enabled: false
     layout:
       position: left
       priority: 35
@@ -234,7 +232,7 @@ plugins:
       position: footer
       priority: 50
   - source: "@quartz-community/recent-notes"
-    enabled: true
+    enabled: false
     options:
       title: Недавние заметки
       limit: 5
